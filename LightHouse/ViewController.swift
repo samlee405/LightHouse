@@ -11,12 +11,12 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
-    let locationManager = CLLocationManager()
-    let region = CLBeaconRegion(proximityUUID: <#T##UUID#>, identifier: <#T##String#>)
+    @IBOutlet weak var beaconInfoTextLabel: UILabel?
     
-    var colors: Dictionary = [
-        // colors for each beacon
-    ]
+    let locationManager = CLLocationManager()
+    let region = CLBeaconRegion(proximityUUID: UUID(), identifier: "f2f")
+    
+//    var colors: Dictionary = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
         if (knownBeacons.count > 0) {
             let closestBeacon = knownBeacons[0] as CLBeacon
-            self.view.BackgroundColor = self.colors[closestBeacon.minor]
+//            self.view.BackgroundColor = self.colors[closestBeacon.minor]
+            beaconInfoTextLabel.text = String(description: closestBeacon)
         }
     }
 
