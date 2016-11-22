@@ -14,7 +14,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var beaconInfoTextLabel: UILabel?
     
     let locationManager = CLLocationManager()
-    let region = CLBeaconRegion(proximityUUID: UUID(), identifier: "f2f")
+    let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
     
 //    var colors: Dictionary = [:]
 
@@ -38,7 +38,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if (knownBeacons.count > 0) {
             let closestBeacon = knownBeacons[0] as CLBeacon
 //            self.view.BackgroundColor = self.colors[closestBeacon.minor]
-            beaconInfoTextLabel.text = String(description: closestBeacon)
+            beaconInfoTextLabel?.text = String(describing: closestBeacon)
         }
     }
 
