@@ -36,8 +36,6 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.startRangingBeacons(in: region)
-        
-//        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @IBAction func saveBeacon(_ sender: AnyObject) {
@@ -45,7 +43,7 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         if let beacon = roomBeacon {
             room.roomBeacon = beacon
         }
-        room.roomLights = [Light(room: "Light 1"), Light(room: "Light 2"), Light(room: "Light 3")]
+        room.roomLights = [Light(room: "Light 1"), Light(room: "Light 2"), Light(room: "Light 3")] // To be updated
         
         delegate?.addNewRoom(room: room)
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
@@ -64,8 +62,8 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.detailTextLabel?.text = "Light \(indexPath.row)" // Update after implementing Hue SDK
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath)
+        cell.textLabel?.text = "Light \(indexPath.row)" // Update after implementing Hue SDK
         
         return cell
     }

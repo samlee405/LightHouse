@@ -25,8 +25,6 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,21 +34,24 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             if let beacon = currentBeacon {
-                let cell = UITableViewCell()
-                cell.detailTextLabel?.text = beacon
+                let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+                cell.textLabel?.text = beacon
+                cell.isUserInteractionEnabled = false
                 
                 return cell
             }
             else {
-                let cell = UITableViewCell()
-                cell.detailTextLabel?.text = "No current beacon exists"
+                let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+                cell.textLabel?.text = "No current beacon exists"
+                cell.isUserInteractionEnabled = false
                 
                 return cell
             }
         }
         else {
-            let cell = UITableViewCell()
-            cell.detailTextLabel?.text = lightsArray[indexPath.row].roomName
+            let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+            cell.textLabel?.text = lightsArray[indexPath.row - 1].roomName
+            cell.isUserInteractionEnabled = false
             
             return cell
         }
