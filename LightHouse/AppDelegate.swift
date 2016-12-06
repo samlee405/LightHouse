@@ -9,14 +9,20 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
     var window: UIWindow?
 
+    let beaconManager = ESTBeaconManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        self.beaconManager.delegate = self
+        
+        self.beaconManager.requestAlwaysAuthorization()
         // Override point for customization after application launch.
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
