@@ -1,0 +1,6 @@
+framework module Pods_LightHouse {
+  umbrella header "Pods-LightHouse-umbrella.h"
+
+  export *
+  module * { export * }
+}

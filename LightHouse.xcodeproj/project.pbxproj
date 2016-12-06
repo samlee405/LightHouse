@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2447968D041EEEDC2A7DAE09 /* Pods_LightHouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */; };
 		EF0E26471DEE13B800E91EF3 /* RoomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */; };
 		EF0E26491DEE13DF00E91EF3 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */; };
 		EF0E264B1DEE159300E91EF3 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E264A1DEE159300E91EF3 /* Room.swift */; };
@@ -20,17 +21,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomTableViewController.swift; sourceTree = "<group>"; };
-		EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
+		0E3CFA3CFA08FB43252AB83F /* Pods-LightHouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightHouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-LightHouse/Pods-LightHouse.release.xcconfig"; sourceTree = "<group>"; };
+		24A28EC71DF769F700CC90A9 /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		7A85252639C6DDFE6A0C9D23 /* Pods-LightHouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightHouse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LightHouse/Pods-LightHouse.debug.xcconfig"; sourceTree = "<group>"; };
+		E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LightHouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomTableViewController.swift; path = LightHouse/RoomTableViewController.swift; sourceTree = "<group>"; };
+		EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomTableViewCell.swift; path = LightHouse/RoomTableViewCell.swift; sourceTree = "<group>"; };
 		EF0E264A1DEE159300E91EF3 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		EF4934F31DDE76FA000036FE /* LightHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF4934F61DDE76FA000036FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EF4934F81DDE76FA000036FE /* NewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoomViewController.swift; sourceTree = "<group>"; };
+		EF4934F81DDE76FA000036FE /* NewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewRoomViewController.swift; path = LightHouse/NewRoomViewController.swift; sourceTree = "<group>"; };
 		EF4934FB1DDE76FA000036FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF4934FD1DDE76FB000036FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF4935001DDE76FB000036FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF4935021DDE76FB000036FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRoomViewController.swift; sourceTree = "<group>"; };
+		EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditRoomViewController.swift; path = LightHouse/EditRoomViewController.swift; sourceTree = "<group>"; };
 		EFC883071DF0AC6D006BF389 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,17 +44,57 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2447968D041EEEDC2A7DAE09 /* Pods_LightHouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		241B7C4A1DF0E87E00CF3239 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EF4934F81DDE76FA000036FE /* NewRoomViewController.swift */,
+				EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */,
+				EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */,
+			);
+			name = ViewControllers;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		241B7C4B1DF0E8A000CF3239 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */,
+			);
+			name = Cells;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		3AF9CAB253001E4C09861A99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F003993E3820CB5B952DCCE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A85252639C6DDFE6A0C9D23 /* Pods-LightHouse.debug.xcconfig */,
+				0E3CFA3CFA08FB43252AB83F /* Pods-LightHouse.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EF4934EA1DDE76FA000036FE = {
 			isa = PBXGroup;
 			children = (
 				EF4934F51DDE76FA000036FE /* LightHouse */,
 				EF4934F41DDE76FA000036FE /* Products */,
+				4F003993E3820CB5B952DCCE /* Pods */,
+				3AF9CAB253001E4C09861A99 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,15 +110,14 @@
 			isa = PBXGroup;
 			children = (
 				EF4934F61DDE76FA000036FE /* AppDelegate.swift */,
+				241B7C4B1DF0E8A000CF3239 /* Cells */,
+				241B7C4A1DF0E87E00CF3239 /* ViewControllers */,
 				EFC883061DF0AC55006BF389 /* Object Models */,
-				EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */,
-				EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */,
-				EF4934F81DDE76FA000036FE /* NewRoomViewController.swift */,
-				EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */,
 				EF4934FA1DDE76FA000036FE /* Main.storyboard */,
 				EF4934FD1DDE76FB000036FE /* Assets.xcassets */,
 				EF4934FF1DDE76FB000036FE /* LaunchScreen.storyboard */,
 				EF4935021DDE76FB000036FE /* Info.plist */,
+				24A28EC71DF769F700CC90A9 /* ObjCBridge.h */,
 			);
 			path = LightHouse;
 			sourceTree = "<group>";
@@ -94,9 +138,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF4935051DDE76FB000036FE /* Build configuration list for PBXNativeTarget "LightHouse" */;
 			buildPhases = (
+				03A8EF48B7B7AFC6FCA294CB /* [CP] Check Pods Manifest.lock */,
 				EF4934EF1DDE76FA000036FE /* Sources */,
 				EF4934F01DDE76FA000036FE /* Frameworks */,
 				EF4934F11DDE76FA000036FE /* Resources */,
+				6E94CF26CF53A1043D9EEDAA /* [CP] Embed Pods Frameworks */,
+				FE5AB6409680686776039298 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -154,6 +201,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03A8EF48B7B7AFC6FCA294CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6E94CF26CF53A1043D9EEDAA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LightHouse/Pods-LightHouse-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE5AB6409680686776039298 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LightHouse/Pods-LightHouse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EF4934EF1DDE76FA000036FE /* Sources */ = {
@@ -237,6 +332,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -278,6 +374,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -285,6 +382,7 @@
 		};
 		EF4935061DDE76FB000036FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A85252639C6DDFE6A0C9D23 /* Pods-LightHouse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y38T3TH9N8;
@@ -298,6 +396,7 @@
 		};
 		EF4935071DDE76FB000036FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E3CFA3CFA08FB43252AB83F /* Pods-LightHouse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y38T3TH9N8;
