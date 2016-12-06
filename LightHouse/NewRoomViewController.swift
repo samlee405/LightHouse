@@ -37,6 +37,14 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         }
         locationManager.startRangingBeacons(in: region)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        
+        var frame: CGRect = self.tableView.frame
+        frame.size.height = self.tableView.contentSize.height
+        self.tableView.frame = frame
+    }
 
     @IBAction func saveBeacon(_ sender: AnyObject) {
         let room = Room(name: newRoomTextField.text!)

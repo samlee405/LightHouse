@@ -47,6 +47,16 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         }
     }
  
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let cell = tableView
+//        let tableViewHeight =
+//        
+//        return 200
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 200
+//    }
 
     /*
     // Override to support rearranging the table view.

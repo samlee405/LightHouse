@@ -7,20 +7,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Rooms-->
+        <!--LightHouse-->
         <scene sceneID="PRf-Pv-4Db">
             <objects>
                 <tableViewController id="qEP-Ff-YOD" customClass="RoomTableViewController" customModule="LightHouse" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="212" sectionHeaderHeight="28" sectionFooterHeight="28" id="qvB-Ei-orx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="359" sectionHeaderHeight="28" sectionFooterHeight="28" id="qvB-Ei-orx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="roomCell" rowHeight="212" id="pqr-MS-pn1" customClass="RoomTableViewCell" customModule="LightHouse" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="212"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="roomCell" rowHeight="359" id="pqr-MS-pn1" customClass="RoomTableViewCell" customModule="LightHouse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="375" height="359"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqr-MS-pn1" id="hmZ-LG-hS8">
-                                    <frame key="frameInset" width="375" height="212"/>
+                                    <frame key="frameInset" width="375" height="359"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxT-7X-MdV">
@@ -50,12 +50,15 @@
                                                 </tableViewCell>
                                             </prototypes>
                                         </tableView>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Ok-ST-qkz"/>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="kaC-Cq-yud" firstAttribute="top" secondItem="MxT-7X-MdV" secondAttribute="bottom" constant="17" id="2hU-Wh-buZ"/>
                                         <constraint firstItem="MxT-7X-MdV" firstAttribute="top" secondItem="hmZ-LG-hS8" secondAttribute="topMargin" id="Ctz-d6-BjP"/>
                                         <constraint firstAttribute="trailing" secondItem="kaC-Cq-yud" secondAttribute="trailing" constant="8" id="MBY-ZP-NpQ"/>
                                         <constraint firstAttribute="bottom" secondItem="kaC-Cq-yud" secondAttribute="bottom" constant="5" id="YAv-El-jum"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="1Ok-ST-qkz" secondAttribute="trailing" constant="13" id="b7O-NN-SxC"/>
+                                        <constraint firstItem="1Ok-ST-qkz" firstAttribute="top" secondItem="MxT-7X-MdV" secondAttribute="top" id="bDF-xE-vxi"/>
                                         <constraint firstItem="kaC-Cq-yud" firstAttribute="leading" secondItem="hmZ-LG-hS8" secondAttribute="leading" constant="8" id="nC8-gd-kfZ"/>
                                         <constraint firstItem="MxT-7X-MdV" firstAttribute="leading" secondItem="hmZ-LG-hS8" secondAttribute="leadingMargin" id="tWv-dm-3Ls"/>
                                     </constraints>
@@ -71,7 +74,7 @@
                             <outlet property="delegate" destination="qEP-Ff-YOD" id="z8g-yA-XwH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Rooms" id="UZ4-Vs-qlL">
+                    <navigationItem key="navigationItem" title="LightHouse" id="UZ4-Vs-qlL">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5q7-LB-myb">
                             <connections>
                                 <segue destination="z8c-PG-gSo" kind="show" identifier="newRoomSegue" id="Jkz-T2-Jdy"/>
@@ -125,14 +128,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="lightCell" textLabel="f7K-fF-IaI" style="IBUITableViewCellStyleDefault" id="1cK-jv-V0j">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="342" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cK-jv-V0j" id="4M8-hE-cj2">
-                                            <frame key="frameInset" width="1000" height="43.5"/>
+                                            <frame key="frameInset" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f7K-fF-IaI">
-                                                    <frame key="frameInset" minX="164" width="672" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="312" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>

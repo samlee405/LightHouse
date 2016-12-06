@@ -21,6 +21,7 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         
         cellTableView.dataSource = self
         cellTableView.delegate = self
+        cellTableView.isScrollEnabled = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,6 +53,10 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
             let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
             cell.textLabel?.text = lightsArray[indexPath.row - 1].roomName
             cell.isUserInteractionEnabled = false
+            
+            var frame: CGRect = self.cellTableView.frame
+            frame.size.height = self.cellTableView.contentSize.height
+            self.cellTableView.frame = frame
             
             return cell
         }
