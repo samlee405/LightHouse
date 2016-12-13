@@ -21,6 +21,7 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
     
     var delegate: NewRoomViewControllerDelegate?
     var roomBeacon: String?
+    var availableLights: [[Any]] = []
     
     let locationManager = CLLocationManager()
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
@@ -36,6 +37,15 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.startRangingBeacons(in: region)
+        
+        //Begin searching for lights in vicinity
+        var bridgeSendAPI = PHBridgeSendAPI()
+        bridgeSendAPI.searchForNewLights(with: PHSearchForNewDevicesDelegate!)
+        
+        let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
+        for (key, value) in (cache?.lights)! {
+            availableLights.append([key, value])
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
