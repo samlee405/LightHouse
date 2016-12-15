@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
         
-        self.hueManager.enableLogging(true)
+        self.hueManager.enableLogging(false)
         self.hueManager.startUp()
         
         let notificationManager: PHNotificationManager = PHNotificationManager.default()

@@ -39,13 +39,7 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         locationManager.startRangingBeacons(in: region)
         
         //Begin searching for lights in vicinity
-        var bridgeSendAPI = PHBridgeSendAPI()
-        bridgeSendAPI.searchForNewLights(with: PHSearchForNewDevicesDelegate!)
-        
-        let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
-        for (key, value) in (cache?.lights)! {
-            availableLights.append([key, value])
-        }
+        searchForAvailableLights()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,6 +60,25 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         delegate?.addNewRoom(room: room)
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
     }
+    
+    func searchForAvailableLights() {
+        let bridgeSendAPI = PHBridgeSendAPI()
+        
+        let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
+        for (key, value) in (cache?.lights)! {
+            var isUsed = false // Whether or not a light is currently already assigned to a room/group
+            
+            for group in (cache?.groups)! {
+                if group.value == value {
+                    isUsed = true
+                }
+            }
+            
+            if !isUsed {
+                availableLights.append([key, value])
+            }
+        }
+    }
 
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
@@ -75,13 +88,15 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         }
     }
     
+    // MARK: - Tableview protocol functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 // Change later after bridging Hue SDK
+        return availableLights.count // Change later after bridging Hue SDK
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath)
-        cell.textLabel?.text = "Light \(indexPath.row)" // Update after implementing Hue SDK
+        cell.textLabel?.text = String(describing: availableLights[indexPath.row][1])
         
         return cell
     }

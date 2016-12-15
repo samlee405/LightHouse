@@ -1,12 +1,22 @@
 PODS:
+  - CocoaLumberjack (3.0.0):
+    - CocoaLumberjack/Default (= 3.0.0)
+    - CocoaLumberjack/Extensions (= 3.0.0)
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (3.0.0):
+    - CocoaLumberjack/Default
   - EstimoteSDK (4.11.2)
 
 DEPENDENCIES:
+  - CocoaLumberjack
   - EstimoteSDK
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   EstimoteSDK: 79e289736d75b56bbd8ecb4cf518c3a007c6fb49
 
-PODFILE CHECKSUM: 74b715c24c07b227b1323a74afb52b594e8da87a
+PODFILE CHECKSUM: 8a5a1f2a06acf7af065a3c033be40125d56b6889
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1
