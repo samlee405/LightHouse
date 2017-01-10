@@ -166,7 +166,7 @@
 				TargetAttributes = {
 					EF4934F21DDE76FA000036FE = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = Y38T3TH9N8;
+						DevelopmentTeam = D36AC3V592;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -385,7 +385,7 @@
 			baseConfigurationReference = 7A85252639C6DDFE6A0C9D23 /* Pods-LightHouse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y38T3TH9N8;
+				DEVELOPMENT_TEAM = D36AC3V592;
 				INFOPLIST_FILE = LightHouse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouse;
@@ -399,7 +399,7 @@
 			baseConfigurationReference = 0E3CFA3CFA08FB43252AB83F /* Pods-LightHouse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y38T3TH9N8;
+				DEVELOPMENT_TEAM = D36AC3V592;
 				INFOPLIST_FILE = LightHouse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouse;
