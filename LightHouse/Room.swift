@@ -22,22 +22,11 @@ class Room {
     func addLightToRoom(light: Light){
         roomLights.append(light)
         
-        var broadcastString = roomLightStringBuilder()
-        
-        EstimoteHelper().get
-        
+        EstimoteHelper().writeLights(lights: roomLightDictBuilder())
         
     }
     
-    private func roomLightStringBuilder() -> String{
-        var broadcastString = "" //consists of the room name followed by a list of room light identifiers (formatted as JSON maybe?)
-        
-        broadcastString.append(roomTitle)
-        
-        for light in self.roomLights{
-            //TODO: Sam, write this shiz
-        }
-        
-        return broadcastString
+    private func roomLightDictBuilder() -> Dictionary<String, String>{
+        // TODO: Sam this is yours
     }
 }

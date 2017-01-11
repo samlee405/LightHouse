@@ -8,8 +8,10 @@
 
 import Foundation
 
-protocol EstimoteHelperDelegate {
-    func beaconsFound(beacons: [CLBeacon])
+@objc protocol EstimoteHelperDelegate {
+    @objc optional func beaconsFound(beacons: [CLBeacon])
+    @objc optional func beaconReadComplete(lights: Dictionary<String, String>)
+    @objc optional func beaconWriteComplete()
 }
 
 class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelegate, ESTDeviceConnectableDelegate {
@@ -24,6 +26,11 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
     var places: [CLBeacon] = [CLBeacon]()
     
     var delegate: EstimoteHelperDelegate?
+    
+    var isReading = false
+    var isWriting = false
+    
+    private var dictToWrite: Dictionary<String, String>?
     
     override init(){
         super.init()
@@ -54,12 +61,22 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         return self.places.first
     }
     
+    func readLights(){
+        self.isReading = true
+        self.device.connectForStorageRead()
+    }
+    
+    func writeLights(lights: Dictionary<String, String>){
+        self.isWriting = true
+        self.dictToWrite = lights
+        self.device.connect()
+    }
+    
     func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon],
                        in region: CLBeaconRegion) {
         places = beacons
-        delegate?.beaconsFound(beacons: beacons)
+        delegate?.beaconsFound!(beacons: beacons)
     }
-    
     
     func deviceManager(_ manager: ESTDeviceManager,
                        didDiscover devices: [ESTDevice]) {
@@ -73,7 +90,27 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
     
     func estDeviceConnectionDidSucceed(_ device: ESTDeviceConnectable) {
         print("Connected")
-        self.device.
+        
+        if isReading{
+            self.isReading = false
+            self.device.storage?.readStorageDictionary(completion: { (lights, error) in
+                if (error != nil){
+                    print(error.debugDescription)
+                    return
+                }
+                self.delegate?.beaconReadComplete!(lights: lights as! Dictionary<String, String>)
+            })
+        }else if isWriting{
+            self.isWriting = false
+            self.device.storage?.saveStorageDictionary(self.dictToWrite!, withCompletion: { (error) in
+                if error == nil{
+                    print(error.debugDescription)
+                }else{
+                    self.delegate?.beaconWriteComplete!()
+                }
+            })
+        }
+        
     }
     
     func estDevice(_ device: ESTDeviceConnectable,

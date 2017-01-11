@@ -19,19 +19,19 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
                 lightState.on = false
                 bridgeSendAPI.updateLightState(forId: (light as AnyObject).identifier, with: lightState, completionHandler: { (error: [Any]?) in
                     if error != nil {
-                        print(error)
+                        print(error?.debugDescription ?? "error")
                     }
                 })
             }
             
             loop: for room in roomArray {
-                if room.roomBeacon == String(describing: closestBeacon) {
+                if room.roomBeacon == closestBeacon {
                     for light in room.roomLights {
                         let lightState = PHLightState()
                         lightState.on = true
                         bridgeSendAPI.updateLightState(forId: light.lightID, with: lightState, completionHandler: { (error: [Any]?) in
                             if error != nil {
-                                print(error)
+                                print(error!)
                             }
                         })
                     }
@@ -76,9 +76,11 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
-        cell.roomTitleLabel.text = roomArray[indexPath.row].roomTitle
-        cell.currentBeacon = (roomArray[indexPath.row].roomBeacon as! ESTDeviceLocationBeacon).settings?.deviceInfo.name.getValue()
-        cell.lightsArray = roomArray[indexPath.row].roomLights
+        let cellRoom = roomArray[indexPath.row]
+       
+        cell.roomTitleLabel.text = cellRoom.roomTitle
+        cell.currentBeacon = cellRoom.roomBeacon.proximityUUID.uuidString
+        cell.lightsArray = cellRoom.roomLights
 
         return cell
     }
