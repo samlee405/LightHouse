@@ -22,6 +22,7 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
     var delegate: NewRoomViewControllerDelegate?
     var roomBeacon: String?
     var availableLights: [[Any]] = []
+    var lightsToAdd: [String] = []
     
     let locationManager = CLLocationManager()
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
@@ -38,7 +39,6 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         }
         locationManager.startRangingBeacons(in: region)
         
-        //Begin searching for lights in vicinity
         searchForAvailableLights()
     }
     
@@ -55,27 +55,20 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         if let beacon = roomBeacon {
             room.roomBeacon = beacon
         }
-        room.roomLights = [Light(room: "Light 1"), Light(room: "Light 2"), Light(room: "Light 3")] // To be updated
+        for light in lightsToAdd {
+            room.roomLights.append(Light(id: light))
+        }
         
         delegate?.addNewRoom(room: room)
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
     }
     
     func searchForAvailableLights() {
-        let bridgeSendAPI = PHBridgeSendAPI()
-        
         let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
-        for (key, value) in (cache?.lights)! {
-            var isUsed = false // Whether or not a light is currently already assigned to a room/group
-            
-            for group in (cache?.groups)! {
-                if group.value == value {
-                    isUsed = true
-                }
-            }
-            
-            if !isUsed {
+        if cache?.lights != nil {
+            for (key, value) in (cache?.lights)! {
                 availableLights.append([key, value])
+                self.tableView.reloadData()
             }
         }
     }
@@ -88,15 +81,20 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         }
     }
     
+    func addLight(light: String) {
+        lightsToAdd.append(light)
+    }
+    
     // MARK: - Tableview protocol functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableLights.count // Change later after bridging Hue SDK
+        return availableLights.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath)
-        cell.textLabel?.text = String(describing: availableLights[indexPath.row][1])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath) as! NewRoomTableViewCell
+        cell.parentViewController = self
+        cell.lightTextLabel.text = String(describing: availableLights[indexPath.row][1])
         
         return cell
     }

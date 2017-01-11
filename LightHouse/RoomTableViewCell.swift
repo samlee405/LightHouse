@@ -51,7 +51,7 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         }
         else {
             let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
-            cell.textLabel?.text = lightsArray[indexPath.row - 1].roomName
+            cell.textLabel?.text = lightsArray[indexPath.row - 1].lightID
             cell.isUserInteractionEnabled = false
             
             var frame: CGRect = self.cellTableView.frame
