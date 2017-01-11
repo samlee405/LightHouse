@@ -10,12 +10,12 @@ import Foundation
 
 class Room {
     var roomTitle: String
-    var roomBeacon: ESTDevice
+    var roomBeacon: CLBeacon
     var roomLights = [Light]()
     
-    init(name: String, roomBeacon: ESTDevice?) {
+    init(name: String, roomBeacon: CLBeacon?) {
         self.roomTitle = name
-        self.roomBeacon = roomBeacon ?? ESTDevice()
+        self.roomBeacon = roomBeacon ?? CLBeacon()
     }
     
     // What adding a light to a room really does is add the uuid of the light to the broadcast string of the estimote associated with the room
@@ -23,6 +23,8 @@ class Room {
         roomLights.append(light)
         
         var broadcastString = roomLightStringBuilder()
+        
+        EstimoteHelper().get
         
         
     }
@@ -33,7 +35,7 @@ class Room {
         broadcastString.append(roomTitle)
         
         for light in self.roomLights{
-            //Takes the UUID of the light and adds it to the broadcast string
+            //TODO: Sam, write this shiz
         }
         
         return broadcastString

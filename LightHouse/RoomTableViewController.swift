@@ -30,7 +30,7 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
         cell.roomTitleLabel.text = roomArray[indexPath.row].roomTitle
-        cell.currentBeacon = roomArray[indexPath.row].roomBeacon
+        cell.currentBeacon = (roomArray[indexPath.row].roomBeacon as! ESTDeviceLocationBeacon).settings?.deviceInfo.name.getValue()
         cell.lightsArray = roomArray[indexPath.row].roomLights
 
         return cell

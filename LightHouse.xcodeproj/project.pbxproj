@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2447968D041EEEDC2A7DAE09 /* Pods_LightHouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */; };
+		24A28ECA1DF776A300CC90A9 /* EstimoteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A28EC91DF776A300CC90A9 /* EstimoteHelper.swift */; };
 		EF0E26471DEE13B800E91EF3 /* RoomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */; };
 		EF0E26491DEE13DF00E91EF3 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */; };
 		EF0E264B1DEE159300E91EF3 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E264A1DEE159300E91EF3 /* Room.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		0E3CFA3CFA08FB43252AB83F /* Pods-LightHouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightHouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-LightHouse/Pods-LightHouse.release.xcconfig"; sourceTree = "<group>"; };
 		24A28EC71DF769F700CC90A9 /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		24A28EC91DF776A300CC90A9 /* EstimoteHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimoteHelper.swift; sourceTree = "<group>"; };
 		7A85252639C6DDFE6A0C9D23 /* Pods-LightHouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightHouse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LightHouse/Pods-LightHouse.debug.xcconfig"; sourceTree = "<group>"; };
 		E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LightHouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomTableViewController.swift; path = LightHouse/RoomTableViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		24A28EC81DF7768E00CC90A9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				24A28EC91DF776A300CC90A9 /* EstimoteHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		3AF9CAB253001E4C09861A99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				EF4934F61DDE76FA000036FE /* AppDelegate.swift */,
+				24A28EC81DF7768E00CC90A9 /* Helpers */,
 				241B7C4B1DF0E8A000CF3239 /* Cells */,
 				241B7C4A1DF0E87E00CF3239 /* ViewControllers */,
 				EFC883061DF0AC55006BF389 /* Object Models */,
@@ -256,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0E26471DEE13B800E91EF3 /* RoomTableViewController.swift in Sources */,
+				24A28ECA1DF776A300CC90A9 /* EstimoteHelper.swift in Sources */,
 				EFC883051DF0A7B3006BF389 /* EditRoomViewController.swift in Sources */,
 				EF4934F91DDE76FA000036FE /* NewRoomViewController.swift in Sources */,
 				EF0E26491DEE13DF00E91EF3 /* RoomTableViewCell.swift in Sources */,
