@@ -17,8 +17,10 @@
 		EF4934FC1DDE76FA000036FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF4934FA1DDE76FA000036FE /* Main.storyboard */; };
 		EF4934FE1DDE76FB000036FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF4934FD1DDE76FB000036FE /* Assets.xcassets */; };
 		EF4935011DDE76FB000036FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF4934FF1DDE76FB000036FE /* LaunchScreen.storyboard */; };
+		EFC1CF7F1E03435A00CFF787 /* NewRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */; };
 		EFC883051DF0A7B3006BF389 /* EditRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */; };
 		EFC883081DF0AC6D006BF389 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC883071DF0AC6D006BF389 /* Light.swift */; };
+		EFF32ED31DF7766D0038CA01 /* HueSDK_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF32ED21DF7766D0038CA01 /* HueSDK_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,8 +39,10 @@
 		EF4934FD1DDE76FB000036FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF4935001DDE76FB000036FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF4935021DDE76FB000036FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewRoomTableViewCell.swift; path = LightHouse/NewRoomTableViewCell.swift; sourceTree = "<group>"; };
 		EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditRoomViewController.swift; path = LightHouse/EditRoomViewController.swift; sourceTree = "<group>"; };
 		EFC883071DF0AC6D006BF389 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		EFF32ED21DF7766D0038CA01 /* HueSDK_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HueSDK_iOS.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFF32ED31DF7766D0038CA01 /* HueSDK_iOS.framework in Frameworks */,
 				2447968D041EEEDC2A7DAE09 /* Pods_LightHouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */,
+				EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */,
 			);
 			name = Cells;
 			path = ..;
@@ -84,6 +90,7 @@
 		3AF9CAB253001E4C09861A99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EFF32ED21DF7766D0038CA01 /* HueSDK_iOS.framework */,
 				E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */,
 			);
 			name = Frameworks;
@@ -226,7 +233,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6E94CF26CF53A1043D9EEDAA /* [CP] Embed Pods Frameworks */ = {
@@ -274,6 +281,7 @@
 				EF4934F71DDE76FA000036FE /* AppDelegate.swift in Sources */,
 				EFC883081DF0AC6D006BF389 /* Light.swift in Sources */,
 				EF0E264B1DEE159300E91EF3 /* Room.swift in Sources */,
+				EFC1CF7F1E03435A00CFF787 /* NewRoomTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +406,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y38T3TH9N8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = LightHouse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouse;
@@ -412,6 +424,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y38T3TH9N8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = LightHouse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouse;
