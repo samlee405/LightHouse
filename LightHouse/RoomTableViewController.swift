@@ -76,7 +76,7 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
-        let cellRoom = roomArray[indexPath.row]
+        let cellRoom = self.roomArray[indexPath.row]
        
         cell.roomTitleLabel.text = cellRoom.roomTitle
         cell.currentBeacon = cellRoom.roomBeacon.proximityUUID.uuidString

@@ -12,6 +12,6 @@ class Light {
     let lightID: String
     
     init(id: String) {
-        lightID = id
+        self.lightID = id
     }
 }

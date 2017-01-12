@@ -39,9 +39,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         
         self.deviceManager.delegate = self
         
-        let deviceIdentifier = getNearestEstimote()?.proximityUUID.uuidString
-        let deviceFilter = ESTDeviceFilterLocationBeacon(
-            identifier: deviceIdentifier!)
+        let deviceFilter = ESTDeviceFilterLocationBeacon()
         self.deviceManager.startDeviceDiscovery(with: deviceFilter)
         
         self.beaconManager.requestAlwaysAuthorization()
@@ -81,6 +79,8 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
     func deviceManager(_ manager: ESTDeviceManager,
                        didDiscover devices: [ESTDevice]) {
         guard let device = devices.first as? ESTDeviceLocationBeacon else { return }
+        getNearestEstimote()?.proximityUUID
+        device.peripheralIdentifier
         self.deviceManager.stopDeviceDiscovery()
         self.device = device
         

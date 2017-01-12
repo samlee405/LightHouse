@@ -23,10 +23,13 @@ class Room {
         roomLights.append(light)
         
         EstimoteHelper().writeLights(lights: roomLightDictBuilder())
-        
     }
     
     private func roomLightDictBuilder() -> Dictionary<String, String>{
-        // TODO: Sam this is yours
+        var lights: [String: String] = [:]
+       
+        self.roomLights.map{ lights[$0.lightID] = "" }
+        
+        return lights
     }
 }
