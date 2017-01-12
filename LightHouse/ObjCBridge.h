@@ -10,6 +10,5 @@
 #define ObjCBridge_h
 
 #import <EstimoteSDK/EstimoteSDK.h>
-#import <HueSDK_iOS/HueSDK.h>
 
 #endif /* ObjCBridge_h */

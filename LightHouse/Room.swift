@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Room {
+class Room: EstimoteHelperDelegate {
     var roomTitle: String
     var roomBeacon: CLBeacon
     var roomLights = [Light]()

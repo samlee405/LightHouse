@@ -12,6 +12,8 @@
 		EF0E26471DEE13B800E91EF3 /* RoomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */; };
 		EF0E26491DEE13DF00E91EF3 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */; };
 		EF0E264B1DEE159300E91EF3 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E264A1DEE159300E91EF3 /* Room.swift */; };
+		EF0F46D31E281E55004E265E /* HueAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0F46D21E281E55004E265E /* HueAPIHelper.swift */; };
+		EF0F46D51E281F2E004E265E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F46D41E281F2E004E265E /* SwiftyJSON.framework */; };
 		EF4934F71DDE76FA000036FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4934F61DDE76FA000036FE /* AppDelegate.swift */; };
 		EF4934F91DDE76FA000036FE /* NewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4934F81DDE76FA000036FE /* NewRoomViewController.swift */; };
 		EF4934FC1DDE76FA000036FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF4934FA1DDE76FA000036FE /* Main.storyboard */; };
@@ -20,7 +22,6 @@
 		EFC1CF7F1E03435A00CFF787 /* NewRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */; };
 		EFC883051DF0A7B3006BF389 /* EditRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */; };
 		EFC883081DF0AC6D006BF389 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC883071DF0AC6D006BF389 /* Light.swift */; };
-		EFF32ED31DF7766D0038CA01 /* HueSDK_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF32ED21DF7766D0038CA01 /* HueSDK_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		EF0E26461DEE13B800E91EF3 /* RoomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomTableViewController.swift; path = LightHouse/RoomTableViewController.swift; sourceTree = "<group>"; };
 		EF0E26481DEE13DF00E91EF3 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomTableViewCell.swift; path = LightHouse/RoomTableViewCell.swift; sourceTree = "<group>"; };
 		EF0E264A1DEE159300E91EF3 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		EF0F46D21E281E55004E265E /* HueAPIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueAPIHelper.swift; sourceTree = "<group>"; };
+		EF0F46D41E281F2E004E265E /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/LightHouse-crddwnmmaguhdmdaahxojcgtvayx/Build/Products/Debug-iphoneos/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		EF4934F31DDE76FA000036FE /* LightHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF4934F61DDE76FA000036FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF4934F81DDE76FA000036FE /* NewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewRoomViewController.swift; path = LightHouse/NewRoomViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +45,6 @@
 		EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewRoomTableViewCell.swift; path = LightHouse/NewRoomTableViewCell.swift; sourceTree = "<group>"; };
 		EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditRoomViewController.swift; path = LightHouse/EditRoomViewController.swift; sourceTree = "<group>"; };
 		EFC883071DF0AC6D006BF389 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
-		EFF32ED21DF7766D0038CA01 /* HueSDK_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HueSDK_iOS.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFF32ED31DF7766D0038CA01 /* HueSDK_iOS.framework in Frameworks */,
+				EF0F46D51E281F2E004E265E /* SwiftyJSON.framework in Frameworks */,
 				2447968D041EEEDC2A7DAE09 /* Pods_LightHouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				24A28EC91DF776A300CC90A9 /* EstimoteHelper.swift */,
+				EF0F46D21E281E55004E265E /* HueAPIHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -90,7 +93,7 @@
 		3AF9CAB253001E4C09861A99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EFF32ED21DF7766D0038CA01 /* HueSDK_iOS.framework */,
+				EF0F46D41E281F2E004E265E /* SwiftyJSON.framework */,
 				E3C61AA4F12671A8A6559F5E /* Pods_LightHouse.framework */,
 			);
 			name = Frameworks;
@@ -233,7 +236,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6E94CF26CF53A1043D9EEDAA /* [CP] Embed Pods Frameworks */ = {
@@ -280,6 +283,7 @@
 				EF0E26491DEE13DF00E91EF3 /* RoomTableViewCell.swift in Sources */,
 				EF4934F71DDE76FA000036FE /* AppDelegate.swift in Sources */,
 				EFC883081DF0AC6D006BF389 /* Light.swift in Sources */,
+				EF0F46D31E281E55004E265E /* HueAPIHelper.swift in Sources */,
 				EF0E264B1DEE159300E91EF3 /* Room.swift in Sources */,
 				EFC1CF7F1E03435A00CFF787 /* NewRoomTableViewCell.swift in Sources */,
 			);

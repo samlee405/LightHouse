@@ -14,35 +14,20 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     
     var closestBeacon: CLBeacon? {
         didSet {
-            for light in (cache?.lights.values)! {
-                let lightState = PHLightState()
-                lightState.on = false
-                bridgeSendAPI.updateLightState(forId: (light as AnyObject).identifier, with: lightState, completionHandler: { (error: [Any]?) in
-                    if error != nil {
-                        print(error?.debugDescription ?? "error")
-                    }
-                })
-            }
+            // turn off all lights
+            // may need to create closure due to asychronous-ny
+            HueHelper.sharedInstance.turnOffLights()
             
+            // turn on lights for the room we're walking into
             loop: for room in roomArray {
                 if room.roomBeacon == closestBeacon {
-                    for light in room.roomLights {
-                        let lightState = PHLightState()
-                        lightState.on = true
-                        bridgeSendAPI.updateLightState(forId: light.lightID, with: lightState, completionHandler: { (error: [Any]?) in
-                            if error != nil {
-                                print(error!)
-                            }
-                        })
-                    }
+                    let currentRoom = room.roomBeacon
+                    
                     break loop
                 }
             }
         }
     }
-    
-    let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
-    let bridgeSendAPI = PHBridgeSendAPI()
     
     let locationManager = CLLocationManager()
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")

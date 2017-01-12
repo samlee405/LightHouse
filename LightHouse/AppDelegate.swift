@@ -12,33 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
     var window: UIWindow?
-
     let beaconManager = ESTBeaconManager()
-    let hueManager = PHHueSDK()
-    
-    var bridgeSearch = PHBridgeSearching()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
-        
-        self.hueManager.enableLogging(false)
-        self.hueManager.startUp()
-        
-        let notificationManager: PHNotificationManager = PHNotificationManager.default()
-        
-        notificationManager.register(self, with: #selector(self.localConnection), forNotification: LOCAL_CONNECTION_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.noLocalConnection), forNotification: NO_LOCAL_CONNECTION_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.notAuthenticated), forNotification: NO_LOCAL_AUTHENTICATION_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.authenticationSuccess), forNotification: PUSHLINK_LOCAL_AUTHENTICATION_SUCCESS_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.authenticationFailed), forNotification: PUSHLINK_LOCAL_AUTHENTICATION_FAILED_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.noLocalConnection), forNotification: PUSHLINK_NO_LOCAL_CONNECTION_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.noLocalBridge), forNotification: PUSHLINK_NO_LOCAL_BRIDGE_KNOWN_NOTIFICATION)
-        notificationManager.register(self, with: #selector(self.buttonNotPressed), forNotification: PUSHLINK_BUTTON_NOT_PRESSED_NOTIFICATION)
-
-        
-        enableHeartBeat()
 
         return true
     }
@@ -54,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        enableHeartBeat()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -64,93 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    // MARK: - Notification receivers
-    
-    func localConnection() {
-        if !hueManager.localConnected() {
-            // Handle error
-        }
-        else {
-            print("Pushlink Success")
-        }
-    }
-    
-    func noLocalConnection() {
-        if !hueManager.localConnected() {
-            // Handle error
-        }
-        else {
-            print("Pushlink Success")
-        }
-    }
-    
-    func notAuthenticated() {
-//        PHNotificationManager.default().deregisterObject(forAllNotifications: self)
-        doAuthentication()
-    }
-    
-    func doAuthentication() {
-        disableHeartBeat()
-        hueManager.startPushlinkAuthentication()
-    }
-    
-    func authenticationSuccess() {
-        PHNotificationManager.default().deregisterObject(forAllNotifications: self)
-        enableHeartBeat()
-    }
-    
-    func authenticationFailed() {
-        PHNotificationManager.default().deregisterObject(forAllNotifications: self)
-        print("Bridge authentication failed. Please try again")
-    }
-    
-    func noLocalBridge() {
-        PHNotificationManager.default().deregisterObject(forAllNotifications: self)
-        print("No local bridge found")
-    }
-    
-    func buttonNotPressed() {
-        // Notification that sync process is waiting for user to press button on the bridge
-    }
-    
-    // MARK: - Bridge connection handling
-    
-    func enableHeartBeat() {
-        
-        let cache: PHBridgeResourcesCache? = PHBridgeResourcesReader.readBridgeResourcesCache()
-        if (cache != nil) && (cache?.bridgeConfiguration != nil) && (cache?.bridgeConfiguration.ipaddress != nil) {
-            hueManager.enableLocalConnection()
-        }
-        else {
-            searchForNewBridge()
-        }
-    }
-    
-    func disableHeartBeat() {
-        hueManager.disableLocalConnection()
-    }
-
-    func searchForNewBridge() {
-        disableHeartBeat()
-        self.bridgeSearch = PHBridgeSearching(upnpSearch: true, andPortalSearch: true, andIpAddressSearch: true)
-        self.bridgeSearch.startSearch { (bridgesFound: [AnyHashable : Any]?) in
-            if (bridgesFound?.count)! > 0 {
-                var bridgeID: String?
-                var bridgeIP: String?
-                for key in (bridgesFound?.keys)! {
-                    bridgeID = String(describing: key)
-                    bridgeIP = String(describing: bridgesFound?[key])
-                    break
-                }
-                
-                self.hueManager.setBridgeToUseWithId(bridgeID, ipAddress: bridgeIP)
-                
-                self.enableHeartBeat()
-            }
-        }
-    }
-
 }
 
 

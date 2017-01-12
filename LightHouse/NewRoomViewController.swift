@@ -62,12 +62,9 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func searchForAvailableLights() {
-        let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
-        if cache?.lights != nil {
-            for (key, value) in (cache?.lights)! {
-                availableLights.append([key, value])
-                self.tableView.reloadData()
-            }
+        HueHelper.sharedInstance.getLights { (result) in
+            self.lightsToAdd = result
+            self.tableView.reloadData()
         }
     }
 
