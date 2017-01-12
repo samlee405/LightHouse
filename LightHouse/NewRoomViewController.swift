@@ -13,7 +13,7 @@ protocol NewRoomViewControllerDelegate {
     func addNewRoom(room: Room)
 }
 
-class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EstimoteHelperDelegate {
     
     @IBOutlet weak var newRoomTextField: UITextField!
     @IBOutlet weak var beaconLabel: UILabel!
@@ -21,21 +21,21 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
     
     var delegate: NewRoomViewControllerDelegate?
     var roomBeacon: String?
+    var availableLights: [[Any]] = []
+    var lightsToAdd: [String] = []
     
-    let locationManager = CLLocationManager()
-    let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
+    var estimoteHelper: EstimoteHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        locationManager.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+
+        estimoteHelper = EstimoteHelper()
+        estimoteHelper.delegate = self
         
-        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
-            locationManager.requestWhenInUseAuthorization()
-        }
-        locationManager.startRangingBeacons(in: region)
+        searchForAvailableLights()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,16 +45,30 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         frame.size.height = self.tableView.contentSize.height
         self.tableView.frame = frame
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        estimoteHelper.endRanging()
+    }
+    
     @IBAction func saveBeacon(_ sender: AnyObject) {
-        let room = Room(name: newRoomTextField.text!)
-        if let beacon = roomBeacon {
-            room.roomBeacon = beacon
+        let room = Room(name: newRoomTextField.text!, roomBeacon: estimoteHelper.getNearestEstimote())
+
+        for light in lightsToAdd {
+            room.roomLights.append(Light(id: light))
         }
-        room.roomLights = [Light(room: "Light 1"), Light(room: "Light 2"), Light(room: "Light 3")] // To be updated
         
         delegate?.addNewRoom(room: room)
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
+    }
+    
+    func searchForAvailableLights() {
+        let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
+        if cache?.lights != nil {
+            for (key, value) in (cache?.lights)! {
+                availableLights.append([key, value])
+                self.tableView.reloadData()
+            }
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
@@ -65,15 +79,26 @@ class NewRoomViewController: UIViewController, CLLocationManagerDelegate, UITabl
         }
     }
     
+    func addLight(light: String) {
+        lightsToAdd.append(light)
+    }
+    
+    // MARK: - Tableview protocol functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 // Change later after bridging Hue SDK
+        return availableLights.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath)
-        cell.textLabel?.text = "Light \(indexPath.row)" // Update after implementing Hue SDK
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath) as! NewRoomTableViewCell
+        cell.parentViewController = self
+        cell.lightTextLabel.text = String(describing: availableLights[indexPath.row][1])
         
         return cell
+    }
+    
+    func beaconsFound(beacons: [CLBeacon]) {
+        beaconLabel.text = estimoteHelper.getNearestEstimote().debugDescription
     }
 }
 

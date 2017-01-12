@@ -8,30 +8,79 @@
 
 import UIKit
 
-class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate {
+class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, CLLocationManagerDelegate {
     
     var roomArray = [Room]()
+    
+    var closestBeacon: CLBeacon? {
+        didSet {
+            for light in (cache?.lights.values)! {
+                let lightState = PHLightState()
+                lightState.on = false
+                bridgeSendAPI.updateLightState(forId: (light as AnyObject).identifier, with: lightState, completionHandler: { (error: [Any]?) in
+                    if error != nil {
+                        print(error?.debugDescription ?? "error")
+                    }
+                })
+            }
+            
+            loop: for room in roomArray {
+                if room.roomBeacon == closestBeacon {
+                    for light in room.roomLights {
+                        let lightState = PHLightState()
+                        lightState.on = true
+                        bridgeSendAPI.updateLightState(forId: light.lightID, with: lightState, completionHandler: { (error: [Any]?) in
+                            if error != nil {
+                                print(error!)
+                            }
+                        })
+                    }
+                    break loop
+                }
+            }
+        }
+    }
+    
+    let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
+    let bridgeSendAPI = PHBridgeSendAPI()
+    
+    let locationManager = CLLocationManager()
+    let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
+        
+        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        locationManager.startRangingBeacons(in: region)
     }
     
     func addNewRoom(room: Room) {
         roomArray.append(room)
         tableView.reloadData()
     }
+    
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
+        if (knownBeacons.count > 0) {
+            closestBeacon = knownBeacons[0] as CLBeacon
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return roomArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomCell", for: indexPath) as! RoomTableViewCell
-        cell.roomTitleLabel.text = roomArray[indexPath.row].roomTitle
-        cell.currentBeacon = roomArray[indexPath.row].roomBeacon
-        cell.lightsArray = roomArray[indexPath.row].roomLights
+        let cellRoom = self.roomArray[indexPath.row]
+       
+        cell.roomTitleLabel.text = cellRoom.roomTitle
+        cell.currentBeacon = cellRoom.roomBeacon.proximityUUID.uuidString
+        cell.lightsArray = cellRoom.roomLights
 
         return cell
     }
@@ -46,17 +95,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
- 
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let cell = tableView
-//        let tableViewHeight =
-//        
-//        return 200
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 200
-//    }
 
     /*
     // Override to support rearranging the table view.

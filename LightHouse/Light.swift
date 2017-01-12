@@ -9,9 +9,9 @@
 import Foundation
 
 class Light {
-    let roomName: String
+    let lightID: String
     
-    init(room: String) {
-        roomName = room
+    init(id: String) {
+        self.lightID = id
     }
 }
