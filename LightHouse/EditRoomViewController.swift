@@ -10,6 +10,13 @@ import UIKit
 
 class EditRoomViewController: UIViewController {
     
+    // MARK: IBOutlets
+    
+    @IBOutlet weak var editRoomNameTextField: UITextField!
+    @IBOutlet weak var beaconLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     var currentRoom: Room?
     var index: Int?
 

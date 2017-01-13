@@ -382,6 +382,12 @@
                     <navigationItem key="navigationItem" title="Edit Room" id="6Dc-xP-nbP">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="5GG-Kl-tJd"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="beaconLabel" destination="Nx2-ai-SgW" id="zRS-1N-VBM"/>
+                        <outlet property="editRoomNameTextField" destination="YDd-qH-RtD" id="VOx-qI-dLj"/>
+                        <outlet property="editSearchForBeaconLabel" destination="Nx2-ai-SgW" id="edE-lf-udk"/>
+                        <outlet property="tableView" destination="uSN-pV-paA" id="JVG-59-2cb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RdB-6g-5sD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
