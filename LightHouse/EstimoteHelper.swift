@@ -7,15 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelegate, ESTDeviceConnectableDelegate {
     
-    var beaconManager = ESTBeaconManager()
+    var beaconManager = (UIApplication.shared.delegate as! AppDelegate).beaconManager
     var deviceManager = ESTDeviceManager()
     var device: ESTDeviceLocationBeacon!
-    var beaconRegion = CLBeaconRegion(
-        proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
-        identifier: "ranged region")
+    
     
     private var isWriting = false
     
@@ -32,14 +31,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         self.deviceManager.delegate = self
         
         self.beaconManager.requestAlwaysAuthorization()
-        
-        self.beaconManager.startRangingBeacons(in: self.beaconRegion)
     }
-    
-    func endRanging() {
-        self.beaconManager.stopRangingBeacons(in: self.beaconRegion)
-    }
-    
 
     func writeLightGroupToNearestBeacon(lightGroupNumber: Int, completion: @escaping (Bool) -> ()){
         self.isWriting = true
