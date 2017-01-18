@@ -51,7 +51,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         self.beaconManager.stopRangingBeacons(in: self.beaconRegion)
     }
     
-    func getNearestEstimote()->CLBeacon?{
+    func getNearestEstimote() -> CLBeacon? {
         self.places.sort { (a, b) -> Bool in
             a.proximity.rawValue > b.proximity.rawValue
         }

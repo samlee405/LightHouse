@@ -14,7 +14,7 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var cellTableView: UITableView!
     
     var currentBeacon: String?
-    var lightsArray = [Light]()
+    var lightsArray = [String]()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,7 +51,7 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         }
         else {
             let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
-            cell.textLabel?.text = lightsArray[indexPath.row - 1].lightID
+            cell.textLabel?.text = lightsArray[indexPath.row - 1]
             cell.isUserInteractionEnabled = false
             
             var frame: CGRect = self.cellTableView.frame

@@ -77,7 +77,7 @@ class HueHelper {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
-                print(convertedData)
+//                print(convertedData)
             }
             else {
                 print("Error turning off all lights")

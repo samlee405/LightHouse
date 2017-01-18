@@ -21,7 +21,6 @@
 		EF4935011DDE76FB000036FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF4934FF1DDE76FB000036FE /* LaunchScreen.storyboard */; };
 		EFC1CF7F1E03435A00CFF787 /* NewRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */; };
 		EFC883051DF0A7B3006BF389 /* EditRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */; };
-		EFC883081DF0AC6D006BF389 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC883071DF0AC6D006BF389 /* Light.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +43,6 @@
 		EF4935021DDE76FB000036FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFC1CF7E1E03435A00CFF787 /* NewRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewRoomTableViewCell.swift; path = LightHouse/NewRoomTableViewCell.swift; sourceTree = "<group>"; };
 		EFC883041DF0A7B3006BF389 /* EditRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditRoomViewController.swift; path = LightHouse/EditRoomViewController.swift; sourceTree = "<group>"; };
-		EFC883071DF0AC6D006BF389 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				EF0E264A1DEE159300E91EF3 /* Room.swift */,
-				EFC883071DF0AC6D006BF389 /* Light.swift */,
 			);
 			name = "Object Models";
 			sourceTree = "<group>";
@@ -282,7 +279,6 @@
 				EF4934F91DDE76FA000036FE /* NewRoomViewController.swift in Sources */,
 				EF0E26491DEE13DF00E91EF3 /* RoomTableViewCell.swift in Sources */,
 				EF4934F71DDE76FA000036FE /* AppDelegate.swift in Sources */,
-				EFC883081DF0AC6D006BF389 /* Light.swift in Sources */,
 				EF0F46D31E281E55004E265E /* HueAPIHelper.swift in Sources */,
 				EF0E264B1DEE159300E91EF3 /* Room.swift in Sources */,
 				EFC1CF7F1E03435A00CFF787 /* NewRoomTableViewCell.swift in Sources */,
