@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, CLLocationManagerDelegate {
+class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, ESTBeaconManagerDelegate {
     
     var roomArray = [Room]()
     
@@ -16,30 +16,23 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         didSet {
             // turn off all lights
             // may need to create closure for turning on the lights due to asychronousness
+            //HueHelper.sharedInstance.turnOffLights()
             HueHelper.sharedInstance.turnOffLights()
             
             // turn on lights for the room we're walking into
-            loop: for room in roomArray {
-                if room.roomBeacon == closestBeacon {
-//                    let currentRoom = room.roomBeacon
-                    
-                    break loop
-                }
-            }
+
+            HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.intValue)!)
         }
     }
     
-    let locationManager = CLLocationManager()
+    let beaconManager = (UIApplication.shared.delegate as! AppDelegate).beaconManager
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
+        beaconManager.delegate = self
         
-        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
-            locationManager.requestWhenInUseAuthorization()
-        }
-        locationManager.startRangingBeacons(in: region)
+        beaconManager.startRangingBeacons(in: region)
     }
     
     func addNewRoom(room: Room) {
@@ -47,8 +40,9 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         tableView.reloadData()
     }
     
-    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+    func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
+        
         if (knownBeacons.count > 0) {
             closestBeacon = knownBeacons[0] as CLBeacon
         }
@@ -69,21 +63,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
 
         return cell
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
     

@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Room: EstimoteHelperDelegate {
+class Room {
+    var estimoteHelper = EstimoteHelper()
     var roomTitle: String
     var roomBeacon: CLBeacon
     var roomLights = [String]()
@@ -17,5 +18,15 @@ class Room: EstimoteHelperDelegate {
     init(name: String, roomBeacon: CLBeacon?) {
         self.roomTitle = name
         self.roomBeacon = roomBeacon ?? CLBeacon()
+    }
+    
+    func setLightGroup(lightGroupNumber: Int){
+        estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: lightGroupNumber){(success) in
+            if success{
+                print("light group set to " + self.roomTitle)
+            }else{
+                print("light group set failed")
+            }
+        }
     }
 }

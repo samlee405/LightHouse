@@ -13,10 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
 
     var window: UIWindow?
     let beaconManager = ESTBeaconManager()
+    var beaconRegion = CLBeaconRegion(
+        proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
+        identifier: "ranged region")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
+        self.beaconManager.startRangingBeacons(in: self.beaconRegion)
 
         return true
     }
