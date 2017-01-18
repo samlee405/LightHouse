@@ -17,7 +17,7 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
             // turn off all lights
             // may need to create closure for turning on the lights due to asychronousness
             //HueHelper.sharedInstance.turnOffLights()
-            HueHelper.sharedInstance.turnOffLights(group: oldValue?.minor.description)
+            HueHelper.sharedInstance.turnOffLights()
             
             // turn on lights for the room we're walking into
             HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.description)!)

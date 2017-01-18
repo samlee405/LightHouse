@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-=======
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="drq-5D-9Lh">
     <device id="retina4_7" orientation="portrait">
->>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -26,11 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="359"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqr-MS-pn1" id="hmZ-LG-hS8">
-<<<<<<< HEAD
-                                    
-=======
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="359"/>
->>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
+                                   <rect key="frame" x="0.0" y="0.0" width="375" height="359"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxT-7X-MdV">
@@ -194,11 +187,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cK-jv-V0j" id="4M8-hE-cj2">
-<<<<<<< HEAD
-                                            
-=======
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
->>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ZH-vC-C7T">
@@ -215,11 +204,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DV-qT-tH2">
-<<<<<<< HEAD
-                                                    
-=======
                                                     <rect key="frame" x="8" y="10" width="240" height="24"/>
->>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" red="0.29460642190000003" green="0.38434178670000002" blue="0.60115346859999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -350,11 +335,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="etF-yh-PTf" id="b1D-ym-5bw">
-<<<<<<< HEAD
-                                            
-=======
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
->>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQU-gr-oeU">
@@ -371,11 +352,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F52-oQ-pPr">
-<<<<<<< HEAD
-                                                    
-=======
                                                     <rect key="frame" x="8" y="10" width="240" height="24"/>
->>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" red="0.29460642190000003" green="0.38434178670000002" blue="0.60115346859999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
