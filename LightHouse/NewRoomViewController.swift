@@ -76,9 +76,7 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func addGroupNumber(groupNumber: Int, room: Room) {
-        print("entered func")
         room.groupNumber = groupNumber
-        print(room)
     }
     
     // MARK: - Tableview protocol functions

@@ -150,11 +150,10 @@ class HueHelper {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
-                let groupNumber = convertedData[0]["success"]["id"].int
+                let groupNumber = convertedData[0]["success"]["id"].string
                 if let unwrappedNumber = groupNumber {
                     print("********")
-                    print(unwrappedNumber)
-                    completionHandler(unwrappedNumber, room)
+                    completionHandler(Int(unwrappedNumber)!, room)
                 }
                 else {
                     print("error unwrapping")
