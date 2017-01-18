@@ -8,28 +8,24 @@
 
 import Foundation
 
-class Room: EstimoteHelperDelegate {
+class Room {
+    var estimoteHelper = EstimoteHelper()
     var roomTitle: String
     var roomBeacon: CLBeacon
-    var roomLights = [Light]()
+    var roomLights = [String]()
     
     init(name: String, roomBeacon: CLBeacon?) {
         self.roomTitle = name
         self.roomBeacon = roomBeacon ?? CLBeacon()
     }
     
-    // What adding a light to a room really does is add the uuid of the light to the broadcast string of the estimote associated with the room
-    func addLightToRoom(light: Light){
-        roomLights.append(light)
-        
-        EstimoteHelper().writeLights(lights: roomLightDictBuilder())
-    }
-    
-    private func roomLightDictBuilder() -> Dictionary<String, String>{
-        var lights: [String: String] = [:]
-       
-        self.roomLights.map{ lights[$0.lightID] = "" }
-        
-        return lights
+    func setLightGroup(lightGroupNumber: Int){
+        estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: lightGroupNumber){(success) in
+            if success{
+                print("light group set to " + self.roomTitle)
+            }else{
+                print("light group set failed")
+            }
+        }
     }
 }

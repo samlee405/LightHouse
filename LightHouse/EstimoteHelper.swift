@@ -8,12 +8,6 @@
 
 import Foundation
 
-@objc protocol EstimoteHelperDelegate {
-    @objc optional func beaconsFound(beacons: [CLBeacon])
-    @objc optional func beaconReadComplete(lights: Dictionary<String, String>)
-    @objc optional func beaconWriteComplete()
-}
-
 class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelegate, ESTDeviceConnectableDelegate {
     
     var beaconManager = ESTBeaconManager()
@@ -23,14 +17,12 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
         identifier: "ranged region")
     
-    var places: [CLBeacon] = [CLBeacon]()
+    private var isWriting = false
     
-    var delegate: EstimoteHelperDelegate?
+    private var writeVal: Int?
     
-    var isReading = false
-    var isWriting = false
-    
-    private var dictToWrite: Dictionary<String, String>?
+    private var onWrite: ((Bool) -> ())?
+    private var gotNearestBeacon: ((ESTDeviceLocationBeacon) -> ())?
     
     override init(){
         super.init()
@@ -38,9 +30,6 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         self.beaconManager.avoidUnknownStateBeacons = true
         
         self.deviceManager.delegate = self
-        
-        let deviceFilter = ESTDeviceFilterLocationBeacon()
-        self.deviceManager.startDeviceDiscovery(with: deviceFilter)
         
         self.beaconManager.requestAlwaysAuthorization()
         
@@ -51,66 +40,72 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         self.beaconManager.stopRangingBeacons(in: self.beaconRegion)
     }
     
-    func getNearestEstimote()->CLBeacon?{
-        self.places.sort { (a, b) -> Bool in
-            a.proximity.rawValue > b.proximity.rawValue
-        }
-        
-        return self.places.first
-    }
-    
-    func readLights(){
-        self.isReading = true
-        self.device.connectForStorageRead()
-    }
-    
-    func writeLights(lights: Dictionary<String, String>){
+
+    func writeLightGroupToNearestBeacon(lightGroupNumber: Int, completion: @escaping (Bool) -> ()){
         self.isWriting = true
-        self.dictToWrite = lights
-        self.device.connect()
+        self.writeVal = lightGroupNumber
+        self.onWrite = completion
+
+        let deviceFilter = ESTDeviceFilterLocationBeacon()
+        self.deviceManager.startDeviceDiscovery(with: deviceFilter)
+    }
+    
+    func getNearestBeacon(completion: @escaping (ESTDeviceLocationBeacon) -> ()){
+        self.gotNearestBeacon = completion
+        
+        let deviceFilter = ESTDeviceFilterLocationBeacon()
+        self.deviceManager.startDeviceDiscovery(with: deviceFilter)
     }
     
     func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon],
                        in region: CLBeaconRegion) {
-        places = beacons
-        delegate?.beaconsFound!(beacons: beacons)
+        
     }
     
     func deviceManager(_ manager: ESTDeviceManager,
                        didDiscover devices: [ESTDevice]) {
-        guard let device = devices.first as? ESTDeviceLocationBeacon else { return }
-        getNearestEstimote()?.proximityUUID
-        device.peripheralIdentifier
         self.deviceManager.stopDeviceDiscovery()
-        self.device = device
         
-        self.device.delegate = self
-        self.device.connect()
+        if isWriting{
+            var orderedDevices: [ESTDevice]
+            
+            if devices.count > 0 {
+                orderedDevices = devices.sorted(by: { (ldevice, rdevice) -> Bool in
+                    return ldevice.rssi > rdevice.rssi
+                })
+               
+                let nearestDevice = orderedDevices.first as! ESTDeviceLocationBeacon
+                nearestDevice.delegate = self
+                nearestDevice.connect()
+            }
+        }else{
+            var orderedDevices: [ESTDevice]
+            
+            if devices.count > 0 {
+                orderedDevices = devices.sorted(by: { (ldevice, rdevice) -> Bool in
+                    return ldevice.rssi > rdevice.rssi
+                })
+                
+                let nearestDevice = orderedDevices.first as! ESTDeviceLocationBeacon
+                self.gotNearestBeacon!(nearestDevice)
+            }
+        }
     }
     
     func estDeviceConnectionDidSucceed(_ device: ESTDeviceConnectable) {
         print("Connected")
-        
-        if isReading{
-            self.isReading = false
-            self.device.storage?.readStorageDictionary(completion: { (lights, error) in
-                if (error != nil){
-                    print(error.debugDescription)
-                    return
-                }
-                self.delegate?.beaconReadComplete!(lights: lights as! Dictionary<String, String>)
-            })
-        }else if isWriting{
-            self.isWriting = false
-            self.device.storage?.saveStorageDictionary(self.dictToWrite!, withCompletion: { (error) in
-                if error == nil{
-                    print(error.debugDescription)
+        if isWriting{
+            let estdevice = (device as! ESTDeviceLocationBeacon)
+            estdevice.settings?.iBeacon.minor.writeValue(UInt16(self.writeVal!), completion: { (value, error) in
+                self.isWriting = false
+                if error != nil{
+                    print(error ?? "error")
+                    self.onWrite!(false)
                 }else{
-                    self.delegate?.beaconWriteComplete!()
+                    self.onWrite!(true)
                 }
             })
         }
-        
     }
     
     func estDevice(_ device: ESTDeviceConnectable,
