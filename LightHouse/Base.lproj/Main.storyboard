@@ -27,7 +27,7 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqr-MS-pn1" id="hmZ-LG-hS8">
 <<<<<<< HEAD
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="358.5"/>
+                                    
 =======
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="359"/>
 >>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
@@ -195,7 +195,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cK-jv-V0j" id="4M8-hE-cj2">
 <<<<<<< HEAD
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            
 =======
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
 >>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
@@ -216,7 +216,7 @@
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DV-qT-tH2">
 <<<<<<< HEAD
-                                                    <rect key="frame" x="8" y="10" width="185" height="24"/>
+                                                    
 =======
                                                     <rect key="frame" x="8" y="10" width="240" height="24"/>
 >>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
@@ -351,7 +351,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="etF-yh-PTf" id="b1D-ym-5bw">
 <<<<<<< HEAD
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            
 =======
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
 >>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
@@ -372,7 +372,7 @@
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F52-oQ-pPr">
 <<<<<<< HEAD
-                                                    <rect key="frame" x="8" y="10" width="185" height="24"/>
+                                                    
 =======
                                                     <rect key="frame" x="8" y="10" width="240" height="24"/>
 >>>>>>> 3c071f0c23039755a84d3f99ac1c5ef7c75c173c
