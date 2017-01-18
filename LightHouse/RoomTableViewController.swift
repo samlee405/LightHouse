@@ -41,7 +41,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
                 self.roomArray.append(room)
             }
             self.tableView.reloadData()
-            print("reloading data")
         }
     }
     
@@ -71,8 +70,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
 //        cell.currentBeacon = cellRoom.roomBeacon.proximityUUID.uuidString
         cell.lightsArray = cellRoom.roomLights
         
-        print("data loaded")
-
         return cell
     }
 

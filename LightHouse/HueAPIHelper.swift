@@ -67,7 +67,9 @@ class HueHelper {
                     dataToReturn.append(room)
                 }
                 
-                completionHandler(dataToReturn)
+                DispatchQueue.main.async {
+                    completionHandler(dataToReturn)
+                }
             }
             else {
                 print("Error getting groups")
