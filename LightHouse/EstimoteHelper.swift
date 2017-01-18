@@ -40,11 +40,12 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         self.beaconManager.stopRangingBeacons(in: self.beaconRegion)
     }
     
+
     func writeLightGroupToNearestBeacon(lightGroupNumber: Int, completion: (Bool) -> ()){
         self.isWriting = true
         self.writeVal = lightGroupNumber
         self.onWrite = completion
-        
+
         let deviceFilter = ESTDeviceFilterLocationBeacon()
         self.deviceManager.startDeviceDiscovery(with: deviceFilter)
     }

@@ -15,7 +15,7 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     var closestBeacon: CLBeacon? {
         didSet {
             // turn off all lights
-            // may need to create closure due to asychronous-ny
+            // may need to create closure for turning on the lights due to asychronousness
             HueHelper.sharedInstance.turnOffLights()
             
             // turn on lights for the room we're walking into

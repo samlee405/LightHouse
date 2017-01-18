@@ -12,7 +12,7 @@ class Room {
     var estimoteHelper = EstimoteHelper()
     var roomTitle: String
     var roomBeacon: CLBeacon
-    var roomLights = [Light]()
+    var roomLights = [String]()
     
     init(name: String, roomBeacon: CLBeacon?) {
         self.roomTitle = name

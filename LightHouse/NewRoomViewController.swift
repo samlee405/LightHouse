@@ -20,9 +20,9 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     
     var delegate: NewRoomViewControllerDelegate?
-    var roomBeacon: String?
-    var availableLights: [[Any]] = []
+    var availableLights: [String] = []
     var lightsToAdd: [String] = []
+    var roomBeacon: CLBeacon?
     
     var estimoteHelper: EstimoteHelper!
     
@@ -51,11 +51,13 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func saveBeacon(_ sender: AnyObject) {
-        let room = Room(name: newRoomTextField.text!, roomBeacon: estimoteHelper.getNearestEstimote())
+        let room = Room(name: newRoomTextField.text!, roomBeacon: roomBeacon)
 
         for light in lightsToAdd {
-            room.roomLights.append(Light(id: light))
+            room.roomLights.append(light)
         }
+        
+        HueHelper.sharedInstance.createGroup(lights: lightsToAdd, roomName: newRoomTextField.text!)
         
         delegate?.addNewRoom(room: room)
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
@@ -63,16 +65,9 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func searchForAvailableLights() {
         HueHelper.sharedInstance.getLights { (result) in
-            self.lightsToAdd = result
+            print(result)
+            self.availableLights = result
             self.tableView.reloadData()
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
-        if (knownBeacons.count > 0) {
-            let closestBeacon = knownBeacons[0] as CLBeacon
-            roomBeacon = String(describing: closestBeacon)
         }
     }
     
@@ -89,13 +84,20 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "lightCell", for: indexPath) as! NewRoomTableViewCell
         cell.parentViewController = self
-        cell.lightTextLabel.text = String(describing: availableLights[indexPath.row][1])
+        cell.lightTextLabel.text = String(describing: availableLights[indexPath.row])
         
         return cell
     }
     
     func beaconsFound(beacons: [CLBeacon]) {
-        beaconLabel.text = estimoteHelper.getNearestEstimote().debugDescription
+        let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
+        if (knownBeacons.count > 0) {
+            let closestBeacon = knownBeacons[0] as CLBeacon
+            
+            // Assign the closest beacon to room parameters. 
+            roomBeacon = closestBeacon
+            beaconLabel.text = String(describing: closestBeacon)
+        }
     }
 }
 
