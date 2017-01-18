@@ -57,7 +57,7 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
             room.roomLights.append(light)
         }
         
-        HueHelper.sharedInstance.createGroup(lights: lightsToAdd, roomName: newRoomTextField.text!)
+        HueHelper.sharedInstance.createGroup(lights: lightsToAdd, roomName: newRoomTextField.text!, room: room, completionHandler: addGroupNumber)
         
         delegate?.addNewRoom(room: room)
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
@@ -73,6 +73,12 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func addLight(light: String) {
         lightsToAdd.append(light)
+    }
+    
+    func addGroupNumber(groupNumber: Int, room: Room) {
+        print("entered func")
+        room.groupNumber = groupNumber
+        print(room)
     }
     
     // MARK: - Tableview protocol functions

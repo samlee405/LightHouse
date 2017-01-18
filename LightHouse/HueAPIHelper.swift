@@ -87,8 +87,34 @@ class HueHelper {
         task.resume()
     }
     
-    func turnOnLights(group: String) {
-        let urlString = "http://172.30.5.4/api/Woco7fXdtvyLUtOcMq7WuBesSSzYzTSJz1JYXFrT/groups/" + group + "/action"
+    func turnOffLightsForGroup(group: Int) {
+        let groupAsString = String(group)
+        let urlString = "http://172.30.5.4/api/Woco7fXdtvyLUtOcMq7WuBesSSzYzTSJz1JYXFrT/groups/" + groupAsString + "/action"
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        
+        let dataToSend = "{\"on\": false}"
+        
+        request.httpBody = dataToSend.data(using: String.Encoding.utf8)
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let requestedData = data {
+                let convertedData = JSON(data: requestedData)
+                print(convertedData)
+            }
+            else {
+                print("Error turning on light group")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func turnOnLights(group: Int) {
+        let groupAsString = String(group)
+        let urlString = "http://172.30.5.4/api/Woco7fXdtvyLUtOcMq7WuBesSSzYzTSJz1JYXFrT/groups/" + groupAsString + "/action"
         let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
@@ -111,7 +137,7 @@ class HueHelper {
         task.resume()
     }
     
-    func createGroup(lights: [String], roomName: String) {
+    func createGroup(lights: [String], roomName: String, room: Room, completionHandler: @escaping (Int, Room) -> Void) {
         let url = URL(string: "http://172.30.5.4/api/Woco7fXdtvyLUtOcMq7WuBesSSzYzTSJz1JYXFrT/groups")!
         
         var request = URLRequest(url: url)
@@ -119,14 +145,20 @@ class HueHelper {
         
         let dataToSend = "{\"name\": \"\(roomName)\", \"type\": \"LightGroup\", \"lights\": \(lights)}"
         
-        print(dataToSend)
-        
         request.httpBody = dataToSend.data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
-                print(convertedData)
+                let groupNumber = convertedData[0]["success"]["id"].int
+                if let unwrappedNumber = groupNumber {
+                    print("********")
+                    print(unwrappedNumber)
+                    completionHandler(unwrappedNumber, room)
+                }
+                else {
+                    print("error unwrapping")
+                }
             }
             else {
                 print("Error creating group")

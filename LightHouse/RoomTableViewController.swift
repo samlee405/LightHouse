@@ -21,7 +21,7 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
             // turn on lights for the room we're walking into
             loop: for room in roomArray {
                 if room.roomBeacon == closestBeacon {
-                    let currentRoom = room.roomBeacon
+//                    let currentRoom = room.roomBeacon
                     
                     break loop
                 }
@@ -69,17 +69,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
 
         return cell
     }
- 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
- 
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
 
     /*
     // Override to support rearranging the table view.
@@ -102,7 +91,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         performSegue(withIdentifier: "showRoomCellSegue", sender: self)
     }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "newRoomSegue" {
             let destination = segue.destination as! NewRoomViewController
