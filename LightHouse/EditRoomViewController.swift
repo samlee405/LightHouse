@@ -23,7 +23,8 @@ class EditRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        editRoomNameTextField.attributedPlaceholder =
+            NSAttributedString(string: "Room Name", attributes: [NSForegroundColorAttributeName : UIColor.white])
     }
 
     override func didReceiveMemoryWarning() {

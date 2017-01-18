@@ -28,7 +28,10 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        newRoomTextField.attributedPlaceholder =
+            NSAttributedString(string: "Room Name", attributes: [NSForegroundColorAttributeName : UIColor.white])
+        
         tableView.delegate = self
         tableView.dataSource = self
 
