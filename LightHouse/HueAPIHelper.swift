@@ -38,7 +38,7 @@ class HueHelper {
         task.resume()
     }
     
-    func getGroups(completionHandler: @escaping ((_ result : [String]) -> Void)) {
+    func getGroups(completionHandler: @escaping ((_ result : [Room]) -> Void)) {
         let url = URL(string: "http://172.30.5.4/api/Woco7fXdtvyLUtOcMq7WuBesSSzYzTSJz1JYXFrT/groups/")!
         
         var request = URLRequest(url: url)
@@ -48,9 +48,23 @@ class HueHelper {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
-                var dataToReturn = [String]()
+                var dataToReturn = [Room]()
+                print(convertedData)
                 for (key, _) in convertedData {
-                    dataToReturn.append(key)
+                    let name = convertedData[key]["name"].string!
+                    let groupNumber = Int(key)!
+                    var lights = [String]()
+                    let lightArray = convertedData[key]["lights"].arrayValue
+                    
+                    for light in lightArray {
+                        lights.append(light.string!)
+                    }
+                    
+                    let room = Room(name: name)
+                    room.groupNumber = groupNumber
+                    room.roomLights = lights
+                    
+                    dataToReturn.append(room)
                 }
                 
                 completionHandler(dataToReturn)
@@ -152,7 +166,6 @@ class HueHelper {
                 let convertedData = JSON(data: requestedData)
                 let groupNumber = convertedData[0]["success"]["id"].string
                 if let unwrappedNumber = groupNumber {
-                    print("********")
                     completionHandler(Int(unwrappedNumber)!, room)
                 }
                 else {

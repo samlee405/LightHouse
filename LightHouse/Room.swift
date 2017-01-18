@@ -11,13 +11,12 @@ import Foundation
 class Room {
     var estimoteHelper = EstimoteHelper()
     var roomTitle: String
-    var roomBeacon: CLBeacon
+//    var roomBeacon: CLBeacon?
     var roomLights = [String]()
     var groupNumber: Int?
     
-    init(name: String, roomBeacon: CLBeacon?) {
+    init(name: String) {
         self.roomTitle = name
-        self.roomBeacon = roomBeacon ?? CLBeacon()
     }
     
     func setLightGroup(lightGroupNumber: Int){

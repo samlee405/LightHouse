@@ -17,7 +17,9 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
             // turn off all lights
             // may need to create closure for turning on the lights due to asychronousness
             //HueHelper.sharedInstance.turnOffLights()
-            HueHelper.sharedInstance.turnOffLightsForGroup(group: (oldValue?.minor.intValue)!)
+            if let unwrappedOldValue = oldValue?.minor.intValue {
+                HueHelper.sharedInstance.turnOffLightsForGroup(group: (unwrappedOldValue))
+            }
             
             // turn on lights for the room we're walking into
 
@@ -27,12 +29,20 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     
     let beaconManager = (UIApplication.shared.delegate as! AppDelegate).beaconManager
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         beaconManager.delegate = self
         
         beaconManager.startRangingBeacons(in: region)
+        // Initilize tableView with any existing rooms in the bridge
+        HueHelper.sharedInstance.getGroups { (result) in
+            for room in result {
+                self.roomArray.append(room)
+            }
+            self.tableView.reloadData()
+            print("reloading data")
+        }
     }
     
     func addNewRoom(room: Room) {
@@ -58,8 +68,10 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         let cellRoom = self.roomArray[indexPath.row]
        
         cell.roomTitleLabel.text = cellRoom.roomTitle
-        cell.currentBeacon = cellRoom.roomBeacon.proximityUUID.uuidString
+//        cell.currentBeacon = cellRoom.roomBeacon.proximityUUID.uuidString
         cell.lightsArray = cellRoom.roomLights
+        
+        print("data loaded")
 
         return cell
     }

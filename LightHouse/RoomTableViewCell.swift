@@ -29,37 +29,46 @@ class RoomTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lightsArray.count + 1
+        return lightsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if let beacon = currentBeacon {
-                let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
-                cell.textLabel?.text = beacon
-                cell.isUserInteractionEnabled = false
-                
-                return cell
-            }
-            else {
-                let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
-                cell.textLabel?.text = "No current beacon exists"
-                cell.isUserInteractionEnabled = false
-                
-                return cell
-            }
-        }
-        else {
-            let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
-            cell.textLabel?.text = lightsArray[indexPath.row - 1]
-            cell.isUserInteractionEnabled = false
-            
-            var frame: CGRect = self.cellTableView.frame
-            frame.size.height = self.cellTableView.contentSize.height
-            self.cellTableView.frame = frame
-            
-            return cell
-        }
+//        if indexPath.row == 0 {
+//            if let beacon = currentBeacon {
+//                let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+//                cell.textLabel?.text = beacon
+//                cell.isUserInteractionEnabled = false
+//                
+//                return cell
+//            }
+//            else {
+//                let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+//                cell.textLabel?.text = "No current beacon exists"
+//                cell.isUserInteractionEnabled = false
+//                
+//                return cell
+//            }
+//        }
+//        else {
+//            let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+//            cell.textLabel?.text = lightsArray[indexPath.row - 1]
+//            cell.isUserInteractionEnabled = false
+//            
+//            var frame: CGRect = self.cellTableView.frame
+//            frame.size.height = self.cellTableView.contentSize.height
+//            self.cellTableView.frame = frame
+//            
+//            return cell
+//        }
+        let cell = cellTableView.dequeueReusableCell(withIdentifier: "roomModuleCell", for: indexPath)
+        cell.textLabel?.text = lightsArray[indexPath.row]
+        cell.isUserInteractionEnabled = false
+        
+        var frame: CGRect = self.cellTableView.frame
+        frame.size.height = self.cellTableView.contentSize.height
+        self.cellTableView.frame = frame
+        
+        return cell
     }
 
 }
