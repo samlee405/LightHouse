@@ -22,7 +22,7 @@ class Room {
     func setLightGroup(lightGroupNumber: Int){
         estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: lightGroupNumber){(success) in
             if success{
-                print("light group set to " + roomTitle)
+                print("light group set to " + self.roomTitle)
             }else{
                 print("light group set failed")
             }

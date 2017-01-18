@@ -13,7 +13,7 @@ protocol NewRoomViewControllerDelegate {
     func addNewRoom(room: Room)
 }
 
-class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EstimoteHelperDelegate {
+class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var newRoomTextField: UITextField!
     @IBOutlet weak var beaconLabel: UILabel!
@@ -33,7 +33,6 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
 
         estimoteHelper = EstimoteHelper()
-        estimoteHelper.delegate = self
         
         searchForAvailableLights()
     }

@@ -21,8 +21,8 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
     
     private var writeVal: Int?
     
-    private var onWrite: ((Bool) -> ())
-    private var gotNearestBeacon: ((ESTDeviceLocationBeacon) -> ())
+    private var onWrite: ((Bool) -> ())?
+    private var gotNearestBeacon: ((ESTDeviceLocationBeacon) -> ())?
     
     override init(){
         super.init()
@@ -41,7 +41,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
     }
     
 
-    func writeLightGroupToNearestBeacon(lightGroupNumber: Int, completion: (Bool) -> ()){
+    func writeLightGroupToNearestBeacon(lightGroupNumber: Int, completion: @escaping (Bool) -> ()){
         self.isWriting = true
         self.writeVal = lightGroupNumber
         self.onWrite = completion
@@ -50,7 +50,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         self.deviceManager.startDeviceDiscovery(with: deviceFilter)
     }
     
-    func getNearestBeacon(completion: (ESTDeviceLocationBeacon) -> ()){
+    func getNearestBeacon(completion: @escaping (ESTDeviceLocationBeacon) -> ()){
         self.gotNearestBeacon = completion
         
         let deviceFilter = ESTDeviceFilterLocationBeacon()
@@ -59,8 +59,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
     
     func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon],
                        in region: CLBeaconRegion) {
-        places = beacons
-        delegate?.beaconsFound!(beacons: beacons)
+        
     }
     
     func deviceManager(_ manager: ESTDeviceManager,
@@ -75,7 +74,7 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
                     return ldevice.rssi > rdevice.rssi
                 })
                
-                let nearestDevice = orderedDevices.first
+                let nearestDevice = orderedDevices.first as! ESTDeviceLocationBeacon
                 nearestDevice.delegate = self
                 nearestDevice.connect()
             }
@@ -87,8 +86,8 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
                     return ldevice.rssi > rdevice.rssi
                 })
                 
-                let nearestDevice = orderedDevices.first
-                self.gotNearestBeacon(nearestDevice)
+                let nearestDevice = orderedDevices.first as! ESTDeviceLocationBeacon
+                self.gotNearestBeacon!(nearestDevice)
             }
         }
     }
@@ -97,13 +96,13 @@ class EstimoteHelper: NSObject, ESTBeaconManagerDelegate, ESTDeviceManagerDelega
         print("Connected")
         if isWriting{
             let estdevice = (device as! ESTDeviceLocationBeacon)
-            estdevice.settings?.iBeacon.minor.writeValue(self.writeVal, completion: { (value, error) in
+            estdevice.settings?.iBeacon.minor.writeValue(UInt16(self.writeVal!), completion: { (value, error) in
                 self.isWriting = false
                 if error != nil{
-                    print(error)
-                    onWrite(false)
+                    print(error ?? "error")
+                    self.onWrite!(false)
                 }else{
-                    onWrite(true)
+                    self.onWrite!(true)
                 }
             })
         }
