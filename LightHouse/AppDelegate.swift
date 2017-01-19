@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
+        
+        ESTConfig.setupAppID("lighthouse-ehj", andAppToken: "8d3827292d20b0169959be6dc1b707f1")
         self.beaconManager.startRangingBeacons(in: self.beaconRegion)
 
         return true

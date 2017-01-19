@@ -79,12 +79,17 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func addGroupNumber(groupNumber: Int, room: Room) {
         room.groupNumber = groupNumber
-        estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: groupNumber) { (result) in
-            if !result {
-                print("Connection failed")
+        
+        estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: groupNumber) { (success) in
+            
+            if !success{
+                print("Failed to set light group in addGroupNumber")
+            }else{
+                print("Succeded in addGroupNumber")
             }
         }
-
+        
+        print(room)
     }
     
     // MARK: - Tableview protocol functions

@@ -26,6 +26,14 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
                     HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.intValue)!)
                 }
             }
+            
+//            //This won't work with multiple devices right now. Leaving a room will turn off the lights even if there are other people still in the room. Entering rooms that already have lights on shouldn't be a problem though.
+//            //Turn off the lights from the room we just left
+//            HueHelper.sharedInstance.turnOffLightsForGroup(group: (oldValue?.minor.intValue)!)
+//            
+//            // turn on lights for the room we're walking into
+//
+//            HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.intValue)!)
         }
     }
     
@@ -59,9 +67,12 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
+        let knownBeacons = beacons.filter{ $0.rssi != 0 }.sorted { (lbeacon, rbeacon) -> Bool in
+            return lbeacon.rssi > rbeacon.rssi
+        }
+        
         if (knownBeacons.count > 0) {
-            closestBeacon = knownBeacons[0] as CLBeacon
+            closestBeacon = knownBeacons.first! as CLBeacon
         }
     }
 
