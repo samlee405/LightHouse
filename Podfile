@@ -8,4 +8,5 @@ target 'LightHouse' do
   # Pods for LightHouse
   pod 'EstimoteSDK'
   pod 'CocoaLumberjack'
+  pod 'SwiftyJSON'
 end

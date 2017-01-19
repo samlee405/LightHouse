@@ -8,53 +8,30 @@
 
 import UIKit
 
-class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, CLLocationManagerDelegate {
+class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, ESTBeaconManagerDelegate {
     
     var roomArray = [Room]()
     
     var closestBeacon: CLBeacon? {
         didSet {
-            for light in (cache?.lights.values)! {
-                let lightState = PHLightState()
-                lightState.on = false
-                bridgeSendAPI.updateLightState(forId: (light as AnyObject).identifier, with: lightState, completionHandler: { (error: [Any]?) in
-                    if error != nil {
-                        print(error?.debugDescription ?? "error")
-                    }
-                })
-            }
+            //This won't work with multiple devices right now. Leaving a room will turn off the lights even if there are other people still in the room. Entering rooms that already have lights on shouldn't be a problem though.
+            //Turn off the lights from the room we just left
+            HueHelper.sharedInstance.turnOffLightsForGroup(group: (oldValue?.minor.intValue)!)
             
-            loop: for room in roomArray {
-                if room.roomBeacon == closestBeacon {
-                    for light in room.roomLights {
-                        let lightState = PHLightState()
-                        lightState.on = true
-                        bridgeSendAPI.updateLightState(forId: light.lightID, with: lightState, completionHandler: { (error: [Any]?) in
-                            if error != nil {
-                                print(error!)
-                            }
-                        })
-                    }
-                    break loop
-                }
-            }
+            // turn on lights for the room we're walking into
+
+            HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.intValue)!)
         }
     }
     
-    let cache = PHBridgeResourcesReader.readBridgeResourcesCache()
-    let bridgeSendAPI = PHBridgeSendAPI()
-    
-    let locationManager = CLLocationManager()
+    let beaconManager = (UIApplication.shared.delegate as! AppDelegate).beaconManager
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
+        beaconManager.delegate = self
         
-        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
-            locationManager.requestWhenInUseAuthorization()
-        }
-        locationManager.startRangingBeacons(in: region)
+        beaconManager.startRangingBeacons(in: region)
     }
     
     func addNewRoom(room: Room) {
@@ -62,8 +39,9 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         tableView.reloadData()
     }
     
-    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+    func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
+        
         if (knownBeacons.count > 0) {
             closestBeacon = knownBeacons[0] as CLBeacon
         }
@@ -84,32 +62,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
 
         return cell
     }
- 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
- 
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
     
@@ -117,7 +69,6 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         performSegue(withIdentifier: "showRoomCellSegue", sender: self)
     }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "newRoomSegue" {
             let destination = segue.destination as! NewRoomViewController
