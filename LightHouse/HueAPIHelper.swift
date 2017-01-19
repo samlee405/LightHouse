@@ -49,7 +49,6 @@ class HueHelper {
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
                 var dataToReturn = [Room]()
-                print(convertedData)
                 for (key, _) in convertedData {
                     let name = convertedData[key]["name"].string!
                     let groupNumber = Int(key)!

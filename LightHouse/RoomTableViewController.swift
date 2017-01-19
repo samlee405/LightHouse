@@ -8,33 +8,42 @@
 
 import UIKit
 
-class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, ESTBeaconManagerDelegate {
+class RoomTableViewController: UITableViewController, NewRoomViewControllerDelegate, ESTBeaconManagerDelegate, CLLocationManagerDelegate {
     
     var roomArray = [Room]()
     
     var closestBeacon: CLBeacon? {
         didSet {
-            // turn off all lights
-            // may need to create closure for turning on the lights due to asychronousness
-            //HueHelper.sharedInstance.turnOffLights()
             if let unwrappedOldValue = oldValue?.minor.intValue {
-                HueHelper.sharedInstance.turnOffLightsForGroup(group: (unwrappedOldValue))
+                // did the closest beacon change?
+                if unwrappedOldValue != (closestBeacon?.minor.intValue)! {
+                    // turn off all lights in the room we're walking out of
+                    HueHelper.sharedInstance.turnOffLightsForGroup(group: (unwrappedOldValue))
+                    
+                    // turn on lights for the room we're walking into
+                    print("changing lights")
+                    print(closestBeacon?.minor)
+                    HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.intValue)!)
+                }
             }
-            
-            // turn on lights for the room we're walking into
-
-            HueHelper.sharedInstance.turnOnLights(group: (closestBeacon?.minor.intValue)!)
         }
     }
     
-    let beaconManager = (UIApplication.shared.delegate as! AppDelegate).beaconManager
+    let locationManager = CLLocationManager()
     let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "test")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        beaconManager.delegate = self
+//        beaconManager.delegate = self
+//        
+//        beaconManager.startRangingBeacons(in: region)
         
-        beaconManager.startRangingBeacons(in: region)
+        locationManager.delegate = self
+        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
+                locationManager.requestWhenInUseAuthorization()
+            }
+        locationManager.startRangingBeacons(in: region)
+        
         // Initilize tableView with any existing rooms in the bridge
         HueHelper.sharedInstance.getGroups { (result) in
             for room in result {
@@ -49,9 +58,8 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
         tableView.reloadData()
     }
     
-    func beaconManager(_ manager: Any, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.unknown }
-        
         if (knownBeacons.count > 0) {
             closestBeacon = knownBeacons[0] as CLBeacon
         }

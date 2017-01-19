@@ -66,7 +66,6 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
         performSegue(withIdentifier: "unwindToRoomTableViewController", sender: self)
     }
     
-    // WORKS
     func searchForAvailableLights() {
         HueHelper.sharedInstance.getLights { (result) in
             self.availableLights = result
@@ -80,6 +79,12 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func addGroupNumber(groupNumber: Int, room: Room) {
         room.groupNumber = groupNumber
+        estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: groupNumber) { (result) in
+            if !result {
+                print("Connection failed")
+            }
+        }
+
     }
     
     // MARK: - Tableview protocol functions
