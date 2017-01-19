@@ -81,6 +81,16 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     func addGroupNumber(groupNumber: Int, room: Room) {
         print("entered func")
         room.groupNumber = groupNumber
+        
+        estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: groupNumber) { (success) in
+            
+            if !success{
+                print("Failed to set light group in addGroupNumber")
+            }else{
+                print("Succeded in addGroupNumber")
+            }
+        }
+        
         print(room)
     }
     

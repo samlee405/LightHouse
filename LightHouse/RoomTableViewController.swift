@@ -14,9 +14,8 @@ class RoomTableViewController: UITableViewController, NewRoomViewControllerDeleg
     
     var closestBeacon: CLBeacon? {
         didSet {
-            // turn off all lights
-            // may need to create closure for turning on the lights due to asychronousness
-            //HueHelper.sharedInstance.turnOffLights()
+            //This won't work with multiple devices right now. Leaving a room will turn off the lights even if there are other people still in the room. Entering rooms that already have lights on shouldn't be a problem though.
+            //Turn off the lights from the room we just left
             HueHelper.sharedInstance.turnOffLightsForGroup(group: (oldValue?.minor.intValue)!)
             
             // turn on lights for the room we're walking into
