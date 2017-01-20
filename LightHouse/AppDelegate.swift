@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.beaconManager.delegate = self
-        self.beaconManager.requestAlwaysAuthorization()
+        self.beaconManager.requestWhenInUseAuthorization()
         self.beaconManager.startRangingBeacons(in: self.beaconRegion)
 
         return true

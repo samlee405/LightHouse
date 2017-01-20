@@ -38,7 +38,7 @@ class HueHelper {
         task.resume()
     }
     
-    func getGroups(completionHandler: @escaping ((_ result : [String]) -> Void)) {
+    func getGroups(completionHandler: @escaping ((_ result : [Room]) -> Void)) {
         let url = URL(string: "http://172.30.5.4/api/Woco7fXdtvyLUtOcMq7WuBesSSzYzTSJz1JYXFrT/groups/")!
         
         var request = URLRequest(url: url)
@@ -48,12 +48,28 @@ class HueHelper {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
-                var dataToReturn = [String]()
+                var dataToReturn = [Room]()
+                print(convertedData)
                 for (key, _) in convertedData {
-                    dataToReturn.append(key)
+                    let name = convertedData[key]["name"].string!
+                    let groupNumber = Int(key)!
+                    var lights = [String]()
+                    let lightArray = convertedData[key]["lights"].arrayValue
+                    
+                    for light in lightArray {
+                        lights.append(light.string!)
+                    }
+                    
+                    let room = Room(name: name)
+                    room.groupNumber = groupNumber
+                    room.roomLights = lights
+                    
+                    dataToReturn.append(room)
                 }
                 
-                completionHandler(dataToReturn)
+                DispatchQueue.main.async {
+                    completionHandler(dataToReturn)
+                }
             }
             else {
                 print("Error getting groups")
@@ -100,6 +116,10 @@ class HueHelper {
         request.httpBody = dataToSend.data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request) { (data, response, error) in
+            if error != nil{
+                print("got error")
+                print(error)
+            }
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
                 print(convertedData)
@@ -120,7 +140,7 @@ class HueHelper {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         
-        let dataToSend = "{\"on\": true}"
+        let dataToSend = "{\"on\": true, \"bri\": 100}"
         
         request.httpBody = dataToSend.data(using: String.Encoding.utf8)
         
@@ -150,11 +170,9 @@ class HueHelper {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let requestedData = data {
                 let convertedData = JSON(data: requestedData)
-                let groupNumber = convertedData[0]["success"]["id"].int
+                let groupNumber = convertedData[0]["success"]["id"].string
                 if let unwrappedNumber = groupNumber {
-                    print("********")
-                    print(unwrappedNumber)
-                    completionHandler(unwrappedNumber, room)
+                    completionHandler(Int(unwrappedNumber)!, room)
                 }
                 else {
                     print("error unwrapping")

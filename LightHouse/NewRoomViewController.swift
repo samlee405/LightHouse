@@ -53,7 +53,8 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func saveBeacon(_ sender: AnyObject) {
-        let room = Room(name: newRoomTextField.text!, roomBeacon: roomBeacon)
+        let room = Room(name: newRoomTextField.text!)
+//        room.roomBeacon = roomBeacon
 
         for light in lightsToAdd {
             room.roomLights.append(light)
@@ -68,7 +69,6 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     // WORKS
     func searchForAvailableLights() {
         HueHelper.sharedInstance.getLights { (result) in
-            print(result)
             self.availableLights = result
             self.tableView.reloadData()
         }
@@ -79,7 +79,6 @@ class NewRoomViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func addGroupNumber(groupNumber: Int, room: Room) {
-        print("entered func")
         room.groupNumber = groupNumber
         
         estimoteHelper.writeLightGroupToNearestBeacon(lightGroupNumber: groupNumber) { (success) in

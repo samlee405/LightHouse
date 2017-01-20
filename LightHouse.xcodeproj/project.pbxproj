@@ -184,7 +184,7 @@
 				TargetAttributes = {
 					EF4934F21DDE76FA000036FE = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = Y38T3TH9N8;
+						DevelopmentTeam = P2PP2EM79F;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -408,14 +408,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y38T3TH9N8;
+				DEVELOPMENT_TEAM = P2PP2EM79F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = LightHouse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouseq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -427,14 +427,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y38T3TH9N8;
+				DEVELOPMENT_TEAM = P2PP2EM79F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = LightHouse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samL.LightHouseq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
